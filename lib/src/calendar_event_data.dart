@@ -25,6 +25,8 @@ class CalendarEventData<T extends Object?> {
   /// Title of the event.
   final String title;
 
+  final Widget? icon;
+
   /// Description of the event.
   final String description;
 
@@ -41,6 +43,7 @@ class CalendarEventData<T extends Object?> {
   const CalendarEventData({
     required this.title,
     this.description = "",
+    this.icon,
     this.event,
     this.color = Colors.blue,
     this.startTime,
