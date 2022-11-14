@@ -11,7 +11,7 @@ class Constants {
   static final Random _random = Random();
   static final int _maxColor = 256;
 
-  static const int hoursADay = 24;
+  static const int hoursADay = 48;
 
   static final List<String> weekTitles = ["M", "T", "W", "T", "F", "S", "S"];
 

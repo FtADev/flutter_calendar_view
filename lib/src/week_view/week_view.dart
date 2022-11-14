@@ -569,7 +569,7 @@ class WeekViewState<T extends Object?> extends State<WeekView<T>> {
   ///
   Widget _defaultTimeLineBuilder(DateTime date) {
     final timeLineString = widget.timeLineStringBuilder?.call(date) ??
-        "${((date.hour - 1) % 12) + 1} ${date.hour ~/ 12 == 0 ? "am" : "pm"}";
+        "${((date.hour - 1) % 12) + 1}:${date.minute} ${date.hour ~/ 12 == 0 ? "am" : "pm"}";
     return Transform.translate(
       offset: Offset(0, -7.5),
       child: Padding(
