@@ -61,60 +61,63 @@ class RoundedEventTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: padding,
-      margin: margin,
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: borderRadius,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if(icon != null)
-            Expanded(
-              child: icon!,
-            ),
-          if (title.isNotEmpty)
-            Expanded(
-              child: Text(
-                title,
-                style: titleStyle ??
-                    TextStyle(
-                      fontSize: 20,
-                      color: backgroundColor.accent,
-                    ),
-                softWrap: true,
-                overflow: TextOverflow.fade,
+    return GestureDetector(
+      onTap: () => print(title),
+      child: Container(
+        padding: padding,
+        margin: margin,
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: borderRadius,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if(icon != null)
+              Expanded(
+                child: icon!,
               ),
-            ),
-          if (description.isNotEmpty)
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 15.0),
+            if (title.isNotEmpty)
+              Expanded(
                 child: Text(
-                  description,
-                  style: descriptionStyle ??
+                  title,
+                  style: titleStyle ??
                       TextStyle(
-                        fontSize: 17,
-                        color: backgroundColor.accent.withAlpha(200),
+                        fontSize: 20,
+                        color: backgroundColor.accent,
                       ),
+                  softWrap: true,
+                  overflow: TextOverflow.fade,
                 ),
               ),
-            ),
-          if (totalEvents > 1)
-            Expanded(
-              child: Text(
-                "+${totalEvents - 1} more",
-                style: (descriptionStyle ??
+            if (description.isNotEmpty)
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 15.0),
+                  child: Text(
+                    description,
+                    style: descriptionStyle ??
                         TextStyle(
+                          fontSize: 17,
                           color: backgroundColor.accent.withAlpha(200),
-                        ))
-                    .copyWith(fontSize: 17),
+                        ),
+                  ),
+                ),
               ),
-            ),
-        ],
+            if (totalEvents > 1)
+              Expanded(
+                child: Text(
+                  "+${totalEvents - 1} more",
+                  style: (descriptionStyle ??
+                          TextStyle(
+                            color: backgroundColor.accent.withAlpha(200),
+                          ))
+                      .copyWith(fontSize: 17),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }
