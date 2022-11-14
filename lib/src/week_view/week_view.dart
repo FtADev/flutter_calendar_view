@@ -523,7 +523,7 @@ class WeekViewState<T extends Object?> extends State<WeekView<T>> {
     }
 
     _currentStartDate = _currentWeek.firstDayOfWeek(start: widget.startDay);
-    _currentEndDate = _currentWeek.lastDayOfWeek(start: widget.startDay);
+    _currentEndDate = _currentStartDate.add(Duration(days: 2));
     _currentIndex =
         _minDate.getWeekDifference(_currentEndDate, start: widget.startDay);
   }
@@ -640,9 +640,9 @@ class WeekViewState<T extends Object?> extends State<WeekView<T>> {
         _currentStartDate = DateTime(
           _currentStartDate.year,
           _currentStartDate.month,
-          _currentStartDate.day + (index - _currentIndex) * 7,
+          _currentStartDate.day + (index - _currentIndex) * 3,
         );
-        _currentEndDate = _currentStartDate.add(Duration(days: 6));
+        _currentEndDate = _currentStartDate.add(Duration(days: 2));
         _currentIndex = index;
       });
     }
