@@ -18,6 +18,8 @@ import '../modals.dart';
 import '../typedefs.dart';
 import '_internal_week_view_page.dart';
 
+DateTime get now => DateTime.now();
+
 /// [Widget] to display week view.
 class WeekView<T extends Object?> extends StatefulWidget {
   /// Builder to build tile for events.
@@ -417,8 +419,35 @@ class WeekViewState<T extends Object?> extends State<WeekView<T>> {
     }
   }
 
+  WeekDays mapDayToWeekDay(int day) {
+    switch (day) {
+      case 1:
+        return WeekDays.monday;
+      case 2:
+        return WeekDays.tuesday;
+      case 3:
+        return WeekDays.wednesday;
+      case 4:
+        return WeekDays.thursday;
+      case 5:
+        return WeekDays.friday;
+      case 6:
+        return WeekDays.saturday;
+      case 7:
+        return WeekDays.sunday;
+    }
+    return WeekDays.sunday;
+  }
+
   void _setWeekDays() {
-    _weekDays = widget.weekDays.toSet().toList();
+    // _weekDays = widget.weekDays.toSet().toList();
+
+    final List<WeekDays> days = [
+      mapDayToWeekDay(now.weekday),
+      mapDayToWeekDay(now.add(Duration(days: 1)).weekday),
+      mapDayToWeekDay(now.add(Duration(days: 2)).weekday),
+    ];
+    _weekDays = days;
 
     if (!widget.showWeekends) {
       _weekDays
