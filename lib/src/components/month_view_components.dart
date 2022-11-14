@@ -117,67 +117,70 @@ class FilledCell<T extends Object?> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: backgroundColor,
-      child: Column(
-        children: [
-          SizedBox(
-            height: 5.0,
-          ),
-          CircleAvatar(
-            radius: highlightRadius,
-            backgroundColor:
-                shouldHighlight ? highlightColor : Colors.transparent,
-            child: Text(
-              dateStringBuilder?.call(date) ?? "${date.day}",
-              style: TextStyle(
-                color: shouldHighlight
-                    ? highlightedTitleColor
-                    : isInMonth
-                        ? titleColor
-                        : titleColor.withOpacity(0.4),
-                fontSize: 12,
+    return GestureDetector(
+      onTap: () => print(date),
+      child: Container(
+        color: backgroundColor,
+        child: Column(
+          children: [
+            SizedBox(
+              height: 5.0,
+            ),
+            CircleAvatar(
+              radius: highlightRadius,
+              backgroundColor:
+                  shouldHighlight ? highlightColor : Colors.transparent,
+              child: Text(
+                dateStringBuilder?.call(date) ?? "${date.day}",
+                style: TextStyle(
+                  color: shouldHighlight
+                      ? highlightedTitleColor
+                      : isInMonth
+                          ? titleColor
+                          : titleColor.withOpacity(0.4),
+                  fontSize: 12,
+                ),
               ),
             ),
-          ),
-          if (events.isNotEmpty)
-            Expanded(
-              child: Container(
-                margin: EdgeInsets.only(top: 5.0),
-                clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(),
-                child: SingleChildScrollView(
-                  physics: BouncingScrollPhysics(),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: List.generate(
-                      events.length,
-                      (index) => GestureDetector(
-                        onTap: () =>
-                            onTileTap?.call(events[index], events[index].date),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: events[index].color,
-                            borderRadius: BorderRadius.circular(4.0),
-                          ),
-                          margin: EdgeInsets.symmetric(
-                              vertical: 2.0, horizontal: 3.0),
-                          padding: const EdgeInsets.all(2.0),
-                          alignment: Alignment.center,
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Text(
-                                  events[index].title,
-                                  overflow: TextOverflow.clip,
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    color: events[index].color.accent,
-                                    fontSize: 12,
+            if (events.isNotEmpty)
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.only(top: 5.0),
+                  clipBehavior: Clip.antiAlias,
+                  decoration: BoxDecoration(),
+                  child: SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: List.generate(
+                        events.length,
+                        (index) => GestureDetector(
+                          onTap: () =>
+                              onTileTap?.call(events[index], events[index].date),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: events[index].color,
+                              borderRadius: BorderRadius.circular(4.0),
+                            ),
+                            margin: EdgeInsets.symmetric(
+                                vertical: 2.0, horizontal: 3.0),
+                            padding: const EdgeInsets.all(2.0),
+                            alignment: Alignment.center,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    events[index].title,
+                                    overflow: TextOverflow.clip,
+                                    maxLines: 1,
+                                    style: TextStyle(
+                                      color: events[index].color.accent,
+                                      fontSize: 12,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -185,8 +188,8 @@ class FilledCell<T extends Object?> extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
